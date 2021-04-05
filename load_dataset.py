@@ -38,19 +38,31 @@ placeholder_lang = np.array(placeholder_lang)
 
 merged_dataset = []
 images = []
+sentences = []
 count = 0
 for elem in train_dataset:
     image = elem[0].numpy()
     images.append(image)
     label = int(elem[1].numpy())
-    
     sentence = placeholder_lang[label]
+    sentences.append(sentence)
+
     combined_tuple = (image, sentence)
     merged_dataset.append(combined_tuple)
 
 as_np = np.array(merged_dataset, dtype=object)
 print(as_np.shape)
 imgTensor = tf.convert_to_tensor(images)
+print('img tensor made')
+senTensor = tf.convert_to_tensor(sentences)
+print('sen tensor made')
+print(senTensor)
+dataset = tf.data.Dataset.from_tensor_slices((imgTensor, senTensor))
+print('tensors combined')
+example_input_batch, example_target_batch = next(iter(dataset))
+print(example_input_batch)
+print(example_target_batch)
+print('we did da iter')
 
 #print(type(merged_dataset))
 
@@ -67,7 +79,6 @@ test = 3
 
 def upper_case_fn(t: tf.Tensor):
   return t.numpy() + placeholder_lang[t.numpy()]
-
 dataset = dataset.map(lambda x: tf.py_function(func=upper_case_fn,
           inp=[x], Tout=tf.int32))
 
