@@ -58,7 +58,7 @@ imgTensor = tf.convert_to_tensor(images)
 #dataset9 = tf.data.Dataset.from_tensor_slices(merged_dataset)
 
 
-dataset = tf.data.Dataset.from_tensor_slices(images)
+dataset = tf.data.Dataset.from_tensor_slices(imgTensor)
 #dataset = tf.data.Dataset.from_tensor_slices([[1, 2], [3, 4], [5, 6], [7, 8]])
 dataset = dataset.range(1, 6)  # ==> [ 1, 2, 3, 4, 5 ]
 #lambdafunc = lambda value, labels:  
