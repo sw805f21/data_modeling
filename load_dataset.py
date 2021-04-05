@@ -50,6 +50,11 @@ for elem in train_dataset:
     combined_tuple = (image, sentence)
     merged_dataset.append(combined_tuple)
 
+
+### POTENTIAL SHIT TO TRY:
+# Git images from 1 directorya ina list, convert that to tensor, 
+# Convert 1 sentence to tensor corresponding to said directory, 
+# Du tensorslices on resulting tensors.
 as_np = np.array(merged_dataset, dtype=object)
 print(as_np.shape)
 imgTensor = tf.convert_to_tensor(images)
